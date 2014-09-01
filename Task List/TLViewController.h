@@ -10,4 +10,8 @@
 
 @interface TLViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+- (IBAction)reorderBtn:(UIBarButtonItem *)sender;
+- (IBAction)createTaskBtn:(UIBarButtonItem *)sender;
 @end
