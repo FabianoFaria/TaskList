@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TLCreateTaskViewController.h"
 
-@interface TLViewController : UIViewController
+@interface TLViewController : UIViewController <TLCreateTaskViewControllerDelegate>
+
+@property (strong, nonatomic) NSMutableArray *taskObjects;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
