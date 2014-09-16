@@ -27,6 +27,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.taskNameField.text = self.task.title;
+    self.viewTextView.text = self.task.description;
+    self.datePicker.date = self.task.date;
+    
+    self.taskNameField.delegate = self;
+    self.viewTextView.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +53,35 @@
 }
 */
 
-- (IBAction)saveTaskBtnPress:(id)sender {
+- (IBAction)saveTaskBtnPress:(id)sender
+{
+    [self updateTask];
+    [self.delegate didUpdateTask];
 }
+
+-(void)updateTask
+{
+    self.task.title = self.taskNameField.text;
+    self.task.description = self.viewTextView.text;
+    self.task.date = self.datePicker.date;
+}
+
+#pragma  mark - UITextFieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.taskNameField resignFirstResponder];
+    return YES;
+}
+
+-(BOOL)textView:(UITableView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if([text isEqualToString:@"\n"])
+    {
+        [self.viewTextView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
 @end

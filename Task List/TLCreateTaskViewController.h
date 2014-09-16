@@ -17,7 +17,7 @@
 @end
 
 
-@interface TLCreateTaskViewController : UIViewController
+@interface TLCreateTaskViewController : UIViewController <UITextFieldDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) id <TLCreateTaskViewControllerDelegate> delegate;
 

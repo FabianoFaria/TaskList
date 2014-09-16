@@ -7,8 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TLTasks.h"
+#import "TLUpdateTaskViewController.h"
 
-@interface TLDetailViewController : UIViewController
+@protocol TLDetailViewControllerDelegate <NSObject>
+
+-(void)updateTask;
+
+@end
+
+@interface TLDetailViewController : UIViewController <TLUpdateTaskViewControllerDelegate>
+
+@property (strong, nonatomic) TLTasks *task;
+@property (weak, nonatomic) id <TLDetailViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UILabel *taskLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;

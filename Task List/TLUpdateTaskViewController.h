@@ -7,8 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TLTasks.h"
 
-@interface TLUpdateTaskViewController : UIViewController
+@protocol TLUpdateTaskViewControllerDelegate <NSObject>
+
+-(void)didUpdateTask;
+
+@end
+
+
+@interface TLUpdateTaskViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate>
+
+@property (strong, nonatomic) TLTasks *task;
+@property (weak, nonatomic) id <TLUpdateTaskViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UITextField *taskNameField;
 @property (strong, nonatomic) IBOutlet UITextView *viewTextView;

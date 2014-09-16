@@ -27,6 +27,25 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.taskLabel.text = self.task.title;
+    self.viewLabel.text = self.task.description;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *stringFromDate = [formatter stringFromDate:self.task.date];
+    
+    self.dateLabel.text = stringFromDate;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.destinationViewController isKindOfClass:[TLUpdateTaskViewController class]])
+    {
+        TLUpdateTaskViewController *editTaskViewController = segue.destinationViewController;
+        editTaskViewController.task = self.task;
+        editTaskViewController.delegate = self;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +65,21 @@
 }
 */
 
-- (IBAction)editiBtn:(id)sender {
+- (IBAction)editiBtn:(id)sender
+{
+    [self performSegueWithIdentifier:@"toUpdateTask" sender:nil];
+}
+
+-(void)didUpdateTask
+{
+    self.taskLabel.text = self.task.title;
+    self.viewLabel.text = self.task.description;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *stringFromDate = [formatter stringFromDate:self.task.date];
+    self.dateLabel.text = stringFromDate;
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate updateTask];
 }
 @end
